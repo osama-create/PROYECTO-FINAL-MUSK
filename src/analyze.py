@@ -24,7 +24,8 @@ def load_clients(filepath):
             clients.append(Client(
                 item["client_id"],
                 item["name"],
-                item["country"]
+                item["country"],
+                item.get("signup_date", None)  # ← add this
             ))
     return clients
 
@@ -39,7 +40,8 @@ def load_sales(filepath):
                 int(row["client_id"]),
                 row["product"],
                 row["category"],
-                float(row["amount"])
+                float(row["amount"]),
+                row.get("date", None)  # ← add this
             ))
     return sales
 
