@@ -96,7 +96,7 @@ def generate_report(clients=None, sales=None, sales_collection=None, filepath=No
         "clients":           clients_data,
         "top_client_by_country": top_by_country,  
         "sales_by_category": sales_by_category,
-        "high_spenders":     high_spending_names,
+        "high_spending_clients": high_spending_names, 
         "monthly_sales":     monthly
     }
 
