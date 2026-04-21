@@ -154,4 +154,4 @@ monthly = monthly_sales(os.path.join(BASE_DIR, 'data', 'sales.csv'))
 print(f"Monthly sales: {monthly}")
 
 # Generate final report
-generate_report(clients, sales, sales_collection, "../data/report.json")
+generate_report(clients, sales, sales_collection, os.path.join(BASE_DIR, 'data', 'report.json'))
