@@ -71,7 +71,7 @@ def generate_report(clients=None, sales=None, sales_collection=None, filepath=No
             "country":         client.country,
             "total_spent":     round(sales_collection.total_amount_by_client(client.client_id), 2),
             "average_sale":    round(sales_collection.average_sale_by_client(client.client_id), 2),
-            "number_of_sales": len(sales_collection.sales_by_client(client.client_id))
+            "sale_count": len(sales_collection.sales_by_client(client.client_id))  # ✅
         })
 
     country_results = top_spender_by_country(clients, sales_collection)
