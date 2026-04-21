@@ -1,0 +1,49 @@
+{
+    "summary": {
+        "total_clients": 3,
+        "total_sales": 7,
+        "total_revenue": 3039.44
+    },
+    "clients": [
+        {
+            "client_id": 1,
+            "name": "Alice",
+            "country": "Spain",
+            "total_spent": 1299.97,
+            "average_sale": 433.32,
+            "number_of_sales": 3
+        },
+        {
+            "client_id": 2,
+            "name": "Bob",
+            "country": "Germany",
+            "total_spent": 1389.49,
+            "average_sale": 694.75,
+            "number_of_sales": 2
+        },
+        {
+            "client_id": 3,
+            "name": "Carol",
+            "country": "France",
+            "total_spent": 349.98,
+            "average_sale": 174.99,
+            "number_of_sales": 2
+        }
+    ],
+    "top_by_country": {
+        "Spain": "Alice",
+        "Germany": "Bob",
+        "France": "Carol"
+    },
+    "sales_by_category": {
+        "Accessories": 339.97,
+        "Electronics": 2699.47
+    },
+    "high_spenders": [
+        "Alice",
+        "Bob"
+    ],
+    "monthly_sales": {
+        "2023-07": 3039.44
+    }
+}

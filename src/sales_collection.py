@@ -1,0 +1,31 @@
+from sale import Sale
+
+class SalesCollection:
+    def __init__(self, sales):
+        self.sales = sales
+
+    def sales_by_client(self, client_id):
+        result = []
+        for sale in self.sales:
+            if sale.client_id == client_id:
+                result.append(sale)
+        return result
+
+    def total_amount_by_client(self, client_id):
+        total = 0
+        for sale in self.sales:
+            if sale.client_id == client_id:
+                total += sale.amount
+        return total
+
+    def total_amount_by_category(self, category):
+        total = 0
+        for sale in self.sales:
+            if sale.category == category:
+                total += sale.amount
+        return total
+
+    def average_sale_by_client(self, client_id):
+        total = self.total_amount_by_client(client_id)
+        count = len(self.sales_by_client(client_id))
+        return total / count if count > 0 else 0
