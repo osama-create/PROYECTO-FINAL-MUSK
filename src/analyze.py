@@ -14,6 +14,7 @@ from functional_utils import (
     monthly_sales
 )
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def load_clients(filepath):
     with open(filepath, 'r') as f:
@@ -76,7 +77,7 @@ def generate_report(clients, sales, sales_collection, filepath):
     high_spenders      = high_spending_clients(clients, sales_collection, threshold=500)
     high_spending_names = [client.name for client in high_spenders]
 
-    monthly = monthly_sales("../data/sales.csv")
+    monthly = monthly_sales(os.path.join(BASE_DIR, 'data', 'sales.csv'))  # ✅
 
     report = {
         "summary":           summary,
@@ -97,7 +98,6 @@ def generate_report(clients, sales, sales_collection, filepath):
 # MAIN CODE
 # ============================================================
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 clients = load_clients(os.path.join(BASE_DIR, 'data', 'clients.json'))
 sales   = load_sales(os.path.join(BASE_DIR, 'data', 'sales.csv'))
