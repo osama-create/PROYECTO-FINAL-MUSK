@@ -46,15 +46,16 @@ def load_sales(filepath):
     return sales
 
 
-def generate_report():
-    # Load data internally
-    clients = load_clients(os.path.join(BASE_DIR, 'data', 'clients.json'))
-    sales   = load_sales(os.path.join(BASE_DIR, 'data', 'sales.csv'))
-
-    client_collection = ClientCollection(clients)
-    sales_collection  = SalesCollection(sales)
-
-    filepath = os.path.join(BASE_DIR, 'data', 'report.json')
+def generate_report(clients=None, sales=None, sales_collection=None, filepath=None):
+    # If no arguments passed, load data internally
+    if clients is None:
+        clients = load_clients(os.path.join(BASE_DIR, 'data', 'clients.json'))
+    if sales is None:
+        sales = load_sales(os.path.join(BASE_DIR, 'data', 'sales.csv'))
+    if sales_collection is None:
+        sales_collection = SalesCollection(sales)
+    if filepath is None:
+        filepath = os.path.join(BASE_DIR, 'data', 'report.json')
 
     summary = {
         "total_clients": len(clients),
@@ -104,7 +105,6 @@ def generate_report():
 
     print("Report saved to report.json")
     return report
-
 
 # ============================================================
 # MAIN CODE
@@ -165,5 +165,4 @@ for client in spending_result:
 monthly = monthly_sales(os.path.join(BASE_DIR, 'data', 'sales.csv'))
 print(f"Monthly sales: {monthly}")
 
-# Generate final report
-generate_report(clients, sales, sales_collection, os.path.join(BASE_DIR, 'data', 'report.json'))
+generate_report()
