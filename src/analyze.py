@@ -1,4 +1,5 @@
 import json
+import os
 import csv
 import pandas as pd
 
@@ -96,8 +97,10 @@ def generate_report(clients, sales, sales_collection, filepath):
 # MAIN CODE
 # ============================================================
 
-clients = load_clients('../data/clients.json')
-sales   = load_sales('../data/sales.csv')
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+clients = load_clients(os.path.join(BASE_DIR, 'data', 'clients.json'))
+sales   = load_sales(os.path.join(BASE_DIR, 'data', 'sales.csv'))
 
 client_collection = ClientCollection(clients)
 sales_collection  = SalesCollection(sales)
@@ -147,8 +150,8 @@ for client in spending_result:
     print(f"  {client.name} → €{round(total, 2)}")
 
 # Calculation 10
-monthly_result = monthly_sales("../data/sales.csv")
-print(f"Monthly sales: {monthly_result}")
+monthly = monthly_sales(os.path.join(BASE_DIR, 'data', 'sales.csv'))
+print(f"Monthly sales: {monthly}")
 
 # Generate final report
 generate_report(clients, sales, sales_collection, "../data/report.json")
