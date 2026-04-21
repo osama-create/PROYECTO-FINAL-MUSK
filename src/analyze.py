@@ -46,7 +46,16 @@ def load_sales(filepath):
     return sales
 
 
-def generate_report(clients, sales, sales_collection, filepath):
+def generate_report():
+    # Load data internally
+    clients = load_clients(os.path.join(BASE_DIR, 'data', 'clients.json'))
+    sales   = load_sales(os.path.join(BASE_DIR, 'data', 'sales.csv'))
+
+    client_collection = ClientCollection(clients)
+    sales_collection  = SalesCollection(sales)
+
+    filepath = os.path.join(BASE_DIR, 'data', 'report.json')
+
     summary = {
         "total_clients": len(clients),
         "total_sales":   len(sales),
@@ -56,11 +65,11 @@ def generate_report(clients, sales, sales_collection, filepath):
     clients_data = []
     for client in clients:
         clients_data.append({
-            "client_id":      client.client_id,
-            "name":           client.name,
-            "country":        client.country,
-            "total_spent":    round(sales_collection.total_amount_by_client(client.client_id), 2),
-            "average_sale":   round(sales_collection.average_sale_by_client(client.client_id), 2),
+            "client_id":       client.client_id,
+            "name":            client.name,
+            "country":         client.country,
+            "total_spent":     round(sales_collection.total_amount_by_client(client.client_id), 2),
+            "average_sale":    round(sales_collection.average_sale_by_client(client.client_id), 2),
             "number_of_sales": len(sales_collection.sales_by_client(client.client_id))
         })
 
@@ -76,10 +85,10 @@ def generate_report(clients, sales, sales_collection, filepath):
             sales_collection.total_amount_by_category(category), 2
         )
 
-    high_spenders      = high_spending_clients(clients, sales_collection, threshold=500)
+    high_spenders       = high_spending_clients(clients, sales_collection, threshold=500)
     high_spending_names = [client.name for client in high_spenders]
 
-    monthly = monthly_sales(os.path.join(BASE_DIR, 'data', 'sales.csv'))  # ✅
+    monthly = monthly_sales(os.path.join(BASE_DIR, 'data', 'sales.csv'))
 
     report = {
         "summary":           summary,
@@ -94,6 +103,7 @@ def generate_report(clients, sales, sales_collection, filepath):
         json.dump(report, f, indent=4)
 
     print("Report saved to report.json")
+    return report
 
 
 # ============================================================
